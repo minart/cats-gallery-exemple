@@ -5,17 +5,18 @@
 ```
 $ git clone https://github.com/minart/jellynote.git
 ```
-
-Configure API Cat with .env file.
-
+#dev
 ```
-#dev env
 $ npm install
 $ npm run dev
+```
 
-#prod env
+#prod
+```
 npm run build
 npm run generate
 npm run start
 ```
+
+Edit .env and configure API secret key.
 
