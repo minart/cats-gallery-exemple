@@ -1,6 +1,13 @@
 # PAGES
 
-This directory contains your Application Views and Routes.
-The framework reads all the `*.vue` files inside this directory and creates the router of your application.
+- Init Git private repo
+- Install Nuxt with CLI
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/routing).
+- Request
+- Use API_KEY for extends Cat API search
+- The request only return result when "breed" exist
+- Return field "cat.breed.name" "cat.breed.wikipedia_url" "cat.image" in the template
+
+- Template
+- Loops & display data
+- Set pagination
