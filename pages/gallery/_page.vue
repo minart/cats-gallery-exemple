@@ -21,26 +21,14 @@ import axios from 'axios';
 export default {
   
   mounted(){
-    console.log(this.$route);
   },
-  watch: {
-    '$route.query': '$fetch'
-  },
+
   data(){
     return {
       cats : [],
       total_page : 0,
       current_page : 1
     }
-  },
-
-  methods: {
-      prev(){
-          console.log('prev');
-      },
-      next(){
-          console.log('next');
-      }
   },
 
   async fetch() {
@@ -52,11 +40,10 @@ export default {
     };
     axios.defaults.headers.common['x-api-key'] = process.env.SECRET_API;
     try {
-      const response = await axios.get(`${process.env.URL_API}images/search`, { params: query });
-      this.cats = response.data;
-      this.total_page = response.headers['pagination-count'];
-      this.current_page = response.headers['pagination-page'];
-      return response;
+      const { data, headers} = await axios.get(`${process.env.URL_API}images/search`, { params: query });
+      this.cats = data;
+      this.total_page = headers['pagination-count'];
+      this.current_page = headers['pagination-page'];
     } catch(e) {
       console.log('error', e);
     }
