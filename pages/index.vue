@@ -1,14 +1,10 @@
 <template>
   <div>
-    init app
+    <nuxt-link :to="{ name : 'gallery-page', params : { page: 1 } }">Gallerie test</nuxt-link>
   </div>
 </template>
 
 <script>
-
 export default {
 }
 </script>
-
-<style>
-</style>
