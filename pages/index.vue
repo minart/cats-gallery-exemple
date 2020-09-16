@@ -1,16 +1,12 @@
 <template>
   <div>
-    init
+    init app
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
-  asyncData({ params }) {
-    //init
-  }
 }
 </script>
 
