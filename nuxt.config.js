@@ -1,5 +1,14 @@
 
 export default {
+
+  env: {
+    server: {
+      api : {
+        CAT_SECRET_KEY : "330ad465-8b87-4030-af4b-fbfc132fb1a6",
+        CAT_URL_API : "https://api.thecatapi.com/v1/"
+      }
+    }
+  },
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -50,6 +59,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/separate-env'
   ],
   /*
   ** Build configuration
