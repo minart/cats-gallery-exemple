@@ -5,7 +5,7 @@
         <i class="fa fa-angle-left"/>
       </nuxt-link>
     </div>
-    <div class="grid" v-if="!$fetchState.pending">
+    <div class="grid" :class="isPair" v-if="!$fetchState.pending">
       <div v-for="cat in cats" :key="cat.id">
         <a v-if="cat.breeds[0] && cat.breeds[0].wikipedia_url" :href="cat.breeds[0].wikipedia_url">
           <img :id="cat.id" :src="cat.url" />
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="grid" v-else-if="$fetchState.error"><p>{{ $fetchState.error.message }}</p></div>
-    <div class="grid" v-else><div class="preload-grid" v-for="i in limit" :key="i">Loading data ...</div></div>
+    <div class="grid" :class="isPair" v-else><div class="preload-grid" v-for="i in limit" :key="i">Loading data ...</div></div>
     <div class="paginate">
       <nuxt-link v-if="current_page < total_page" :to="{ path: '', query : { page : +current_page + 1 }}">
         <i class="fa fa-angle-right"/>
@@ -34,6 +34,13 @@ export default {
       total_page: 0,
       current_page: 1
     }
+  },
+  computed: {
+      isPair(){
+        if(this.$route.query.page % 2 === 0)
+            return 'pair';
+        return;
+      }
   },
   watch: {
     '$route.query' : async function(){

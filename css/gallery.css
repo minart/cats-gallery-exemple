@@ -31,7 +31,14 @@
       "p1 p1 p5 p2 p2 p11"
       "p8 p9 p7 p2 p2 p12";
 }
-  
+
+.grid.pair {
+    grid-template-areas:
+    "p4 p1 p1 p6 p3 p10"
+    "p5 p1 p1 p11 p2 p2"
+    "p8 p9 p7 p12 p2 p2";
+}
+
 .grid>div {
     display: flex;
     align-items: center;
@@ -51,6 +58,10 @@
     width: 100%;
     object-fit: cover;
     display: block;
+}
+
+.grid img:hover {
+    filter: brightness(120%);
 }
   
 .grid span {
