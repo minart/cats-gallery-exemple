@@ -3,7 +3,6 @@
     border: 1px solid #fff;
     color: #fff;
 }
-  
 .gallery {
     display: flex;
     text-align: center;
@@ -25,18 +24,19 @@
     height: 100vh;
     width: 100vw;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 32.3%);
+    grid-template-rows: repeat(3, 30.3%) 50px;
     grid-template-areas:
       "p1 p1 p4 p6 p3 p10"
       "p1 p1 p5 p2 p2 p11"
-      "p8 p9 p7 p2 p2 p12";
+      "p8 p9 p7 p2 p2 p12"
+      "page page page page page page";
 }
-
 .grid.pair {
     grid-template-areas:
     "p4 p1 p1 p6 p3 p10"
     "p5 p1 p1 p11 p2 p2"
-    "p8 p9 p7 p12 p2 p2";
+    "p8 p9 p7 p12 p2 p2"
+    "page page page page page page";
 }
 
 .grid>div {
@@ -87,22 +87,18 @@
 .grid :nth-child(10) { grid-area: p10 }
 .grid :nth-child(11) { grid-area: p11 }
 .grid :nth-child(12) { grid-area: p12 }
+.grid > :last-child { grid-area: page; border: 0; }
   
 @media (max-width:1050px) and (min-width:451px) {
-    .grid {
+    .grid, .grid.pair {
         padding: 20px 0;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, 33%);
+        grid-template-rows: repeat(3, 30%) 50px;
         grid-template-areas:
             "p1 p2 p3 p10"
             "p4 p5 p6 p11"
-            "p7 p8 p9 p12";
-    }
-    .grid.pair {
-        grid-template-areas:
-            "p1 p2 p3 p10"
-            "p4 p5 p6 p11"
-            "p7 p8 p9 p12";
+            "p7 p8 p9 p12"
+            "page page page page";
     }
     .grid span {
         width: 100%;
@@ -115,27 +111,20 @@
 }
   
 @media (max-width:450px) and (min-width:0) {
-    .grid {
+    .grid, .grid.pair {
         padding: 10px 0;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(6, 15.5%);
+        grid-template-rows: repeat(6, 15.6%) 40px;
         grid-template-areas:
             "p1 p2"
             "p3 p4"
             "p5 p6"
             "p7 p8"
             "p9 p10"
-            "p11 p12";
+            "p11 p12"
+            ". .";
     }
-    .grid.pair {
-        grid-template-areas:
-            "p1 p2"
-            "p3 p4"
-            "p5 p6"
-            "p7 p8"
-            "p9 p10"
-            "p11 p12";
-    }
+    .grid > :last-child { display: none; }
     .grid span {
         width: 100%;
         padding: 3px 6px;

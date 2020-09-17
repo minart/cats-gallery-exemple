@@ -1,5 +1,5 @@
 <template>
-  <Gallery/>
+  <Gallery :pagination-range="5"/>
 </template>
 
 <script>
