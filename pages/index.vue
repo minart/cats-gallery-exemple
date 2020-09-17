@@ -1,5 +1,10 @@
 <template>
-  <Gallery :pagination-range="5"/>
+  <Gallery
+    mime_types="jpg, png, gif"
+    size="full"
+    order="ASC"
+    :pagination-range="5"
+  />
 </template>
 
 <script>
