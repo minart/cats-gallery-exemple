@@ -98,13 +98,17 @@
             "p4 p5 p6 p11"
             "p7 p8 p9 p12";
     }
-  
+    .grid.pair {
+        grid-template-areas:
+            "p1 p2 p3 p10"
+            "p4 p5 p6 p11"
+            "p7 p8 p9 p12";
+    }
     .grid span {
         width: 100%;
         padding: 3px 6px;
         font-size: 14px;
     }
-  
     .gallery .paginate {
         width: 60px;
     }
@@ -115,6 +119,15 @@
         padding: 10px 0;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(6, 15.5%);
+        grid-template-areas:
+            "p1 p2"
+            "p3 p4"
+            "p5 p6"
+            "p7 p8"
+            "p9 p10"
+            "p11 p12";
+    }
+    .grid.pair {
         grid-template-areas:
             "p1 p2"
             "p3 p4"
