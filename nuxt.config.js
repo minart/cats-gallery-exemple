@@ -18,14 +18,18 @@ export default {
   css: [
     '~/css/layout.css'
   ],
+  router: {
+  },
   plugins: [
+    '~/plugins/catsApi'
   ],
   components: true,
   buildModules: [
     '@nuxtjs/dotenv'
   ],
   modules: [
+    '@nuxtjs/axios'
   ],
-  build: {
+  build: { 
   }
 }

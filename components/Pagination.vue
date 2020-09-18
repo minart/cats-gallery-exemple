@@ -1,20 +1,19 @@
 <template>
-
-  <div class="box" v-if="renderRange.length && max > 0">
-    <div class="limit" v-if="!renderRange.includes(1)">
-      <nuxt-link class="limit" :to="{ path: '', query : { page : 1 }}">1</nuxt-link>
+  <div class="box">
+    <div class="limit" v-if="current > range">
+      <button class="limit"@click="$emit('navigate', 1)">1</button>
       <span>...</span>
     </div>
-    <nuxt-link
-      v-for="i in renderRange" 
-      :class="(i === current) ? 'current' : ''"
-      :key="i" 
-      :to="{ path: '', query : { page : i }}">
-      {{i}}
-    </nuxt-link>
-    <div class="limit" v-if="!renderRange.includes(max)">
+    <button
+      v-for="page in renderRange" 
+      :class="{ 'current' : page === current }"
+      :key="page"
+      @click="$emit('navigate', page)">
+      {{page}}
+    </button>
+    <div class="limit" v-if="current < max - range">
       <span>...</span>
-      <nuxt-link class="limit" :to="{ path: '', query : { page : max }}">{{max}}</nuxt-link>
+      <button class="limit" @click="$emit('navigate', max)">{{max}}</button>
     </div>
   </div>
 </template>
@@ -36,13 +35,6 @@ export default {
       if (current + range > max) end = max - current + range + 1;
       return Array.from({ length: end }, (v, k) => k + start);
     }
-  },
-  mounted(){
-  },
-  data(){
-      return {
-          rangeArray : []
-      }
   }
 }
 </script>
@@ -64,6 +56,15 @@ export default {
   }
   .limit {
     margin: 0 22px;
+  }
+  .box button {
+    border-radius: 4px;
+    background: none;
+    border: 0;
+    padding: 6px;
+  }
+  .box button.current {
+    border: 1px solid #ccc;
   }
   @media (max-width:1050px) and (min-width:451px) {
     a {
