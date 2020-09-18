@@ -77,7 +77,7 @@ export default {
     try {
       const { data, headers } = await axios.get(`${process.env.URL_API}images/search`, { params });
       this.cats = data;
-      this.total_page = +headers['pagination-count'];
+      this.total_page = Math.floor(+headers['pagination-count'] / params.limit);
       this.current_page = +headers['pagination-page'];
     } catch (e) {
       console.log('error', e);
