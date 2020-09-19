@@ -4,7 +4,13 @@
       <gallery 
         @next="navigate(currentPage + 1)"
         @prev="navigate(currentPage - 1)"
-        :datas="datas">
+        :datas="datas"
+        :format="{
+          id: 'id',
+          title: 'breeds.0.name',
+          picture: 'url', 
+          link: 'breeds.0.wikipedia_url'
+        }">
         <template v-slot:bottom>
           <Pagination 
             @navigate="navigate"
@@ -19,41 +25,32 @@
 
 <script>
 export default {
-  data(){
-    return {
-      datas : [],
-      elements: 0,
-      currentPage: 1,
-      limit: 0,
-      req: false,
-      totalPage: 0
-    }
-  },
   methods: {
     navigate(event){
       this.$router.push({ query: { 'page' : event || 1 }});
     }
   },
+  computed: {
+    elements(){
+      return parseInt(this.headers['pagination-count']);
+    },
+    currentPage(){
+      return parseInt(this.headers['pagination-page']);
+    },
+    limit(){
+      return parseInt(this.headers['pagination-limit']);
+    },
+    totalPage(){
+      return Math.floor(this.elements / this.limit);
+    }
+  },
   watchQuery: ['page'],
   async asyncData({ route, app }) {
     const { headers, data } = await app.$catsApiImageSearch.simpleRequest(route.query.page);
-    const elements = parseInt(headers['pagination-count']);
-    const limit = parseInt(headers['pagination-limit']);
-    const mappedData = data.map(image => {
-      return { 
-        id: image.id,
-        name: image.breeds[0].name, 
-        url: image.url, 
-        wikipedia_url: image.breeds[0].wikipedia_url
-      }
-    });
     return {
-      datas : mappedData,
-      elements,
-      totalPage : Math.floor(elements / limit),
-      limit,
-      currentPage: parseInt(route.query.page)
-    };
+      headers,
+      datas : data
+    }
   }
 }
 </script>
