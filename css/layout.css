@@ -4,3 +4,7 @@ body {
     font-weight: 300;
     padding: 0;
 }
+.page { padding: 40px 0; }
+@media (max-width:450px) and (min-width:0) {
+  .page { padding: 0; }
+}

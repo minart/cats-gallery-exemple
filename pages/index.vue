@@ -1,33 +1,32 @@
 <template>
-  <div>
-    <div>
-      <gallery 
-        @next="navigate(currentPage + 1)"
-        @prev="navigate(currentPage - 1)"
-        :datas="datas"
-        :format="{
-          id: 'id',
-          title: 'breeds.0.name',
-          picture: 'url', 
-          link: 'breeds.0.wikipedia_url'
-        }">
-        <template v-slot:bottom>
-          <Pagination 
-            @navigate="navigate"
-            :max="totalPage" 
-            :current="currentPage || 1"
-            :range="5"/>
-        </template>
-      </gallery>
-    </div>
+  <div class="page">
+    <gallery 
+      @prev="navigate(currentPage - 1)"
+      @next="navigate(currentPage + 1)"
+      :datas="data"
+      :format="{
+        id: 'id',
+        title: 'breeds.0.name',
+        picture: 'url', 
+        link: 'breeds.0.wikipedia_url',
+      }">
+      <template v-slot:bottom>
+        <Pagination
+          @navigate="navigate($event)"
+          :max="totalPage" 
+          :current="currentPage || 1"
+          :range="5"/>
+      </template>
+    </gallery>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    navigate(event){
-      this.$router.push({ query: { 'page' : event || 1 }});
+    navigate(page){
+      const p = (!page || page > this.totalPage) ? 1 : page;
+      this.$router.push({ query: { 'page' : p }});
     }
   },
   computed: {
@@ -46,17 +45,10 @@ export default {
   },
   watchQuery: ['page'],
   async asyncData({ route, app }) {
-    const { headers, data } = await app.$catsApiImageSearch.simpleRequest(route.query.page);
+    const { data, headers } = await app.$catsApiImageSearch.simpleRequest(route.query.page);
     return {
-      headers,
-      datas : data
+      data, headers
     }
   }
 }
 </script>
-
-<style scoped>
-.btn {
-  margin: 0 40px;
-}
-</style>
